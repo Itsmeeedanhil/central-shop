@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Header from "../components/header";
+import Header from "../components/dashboardHeader";
 import Image from "next/image";
 
 import {
@@ -224,50 +224,11 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-linear-to-b from-gray-50 to-white">
-      <Header />
+      <Header user={userData} notifications={notifications} />
 
-      {/* Dashboard Header */}
-      <section className="pt-32 pb-12 bg-linear-to-br from-gray-100 via-white to-gray-50">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
-            <div className="flex items-center gap-6">
-                <Image
-                src="https://placehold.co/100x100/1a1a1a/ffffff?text=AM"
-                alt="AM"
-                width={100}
-                height={100}
-                className="object-cover"
-                unoptimized={true}
-                />
-              <div>
-                <h1 className="text-4xl font-extrabold text-gray-900 mb-2">
-                  Welcome back, {userData.name.split(' ')[0]}! 👋
-                </h1>
-                <p className="text-gray-600">
-                  Member since {userData.memberSince}
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <button className="relative p-3 bg-white border-2 border-gray-300 rounded-xl hover:border-black transition-colors duration-300">
-                <Bell className="w-6 h-6 text-gray-900" />
-                {notifications > 0 && (
-                  <span className="absolute -top-1 -right-1 w-5 h-5 bg-black text-white text-xs font-bold rounded-full flex items-center justify-center">
-                    {notifications}
-                  </span>
-                )}
-              </button>
-              <button className="px-6 py-3 bg-black text-white font-semibold rounded-xl hover:bg-gray-800 transition-colors duration-300 flex items-center gap-2">
-                <Settings className="w-5 h-5" />
-                Settings
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Quick Actions */}
-      <section className="py-8 bg-white border-y border-gray-200">
+      <section className="py-8 mt-20 bg-white border-y border-gray-200">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {quickActions.map((action, index) => (
