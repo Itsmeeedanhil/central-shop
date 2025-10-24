@@ -2,12 +2,12 @@
 
 import React, { useState, useEffect } from "react";
 import Header from "../components/header";
+import Image from "next/image";
 
 import {
   ShoppingBag,
   Package,
   Heart,
-  User,
   Settings,
   CreditCard,
   MapPin,
@@ -15,12 +15,9 @@ import {
   TrendingUp,
   Clock,
   CheckCircle,
-  XCircle,
   ChevronRight,
   Star,
-  Download,
   Eye,
-  BarChart3,
 } from "../components/icons";
 
 
@@ -198,7 +195,16 @@ export default function DashboardPage() {
   const SavedItemCard = ({ item }) => (
     <div className="bg-white border-2 border-gray-300 rounded-xl overflow-hidden hover:border-black transition-all duration-300 hover:shadow-xl">
       <div className="aspect-square bg-gray-100">
-        <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover" />
+        <div className="relative w-full h-full">
+            <Image
+            src="https://placehold.co/200x200/f5f5f5/1a1a1a?text=Yoga+Mat"
+            alt="Yoga Mat"
+            width={200}
+            height={200}
+            className="object-cover"
+            unoptimized={true}
+            />
+        </div>
       </div>
       <div className="p-4">
         <h4 className="font-bold text-gray-900 mb-2">{item.name}</h4>
@@ -217,19 +223,22 @@ export default function DashboardPage() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+    <div className="min-h-screen bg-linear-to-b from-gray-50 to-white">
       <Header />
 
       {/* Dashboard Header */}
-      <section className="pt-32 pb-12 bg-gradient-to-br from-gray-100 via-white to-gray-50">
+      <section className="pt-32 pb-12 bg-linear-to-br from-gray-100 via-white to-gray-50">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
             <div className="flex items-center gap-6">
-              <img 
-                src={userData.avatar} 
-                alt={userData.name}
-                className="w-20 h-20 rounded-2xl border-4 border-white shadow-xl"
-              />
+                <Image
+                src="https://placehold.co/100x100/1a1a1a/ffffff?text=AM"
+                alt="AM"
+                width={100}
+                height={100}
+                className="object-cover"
+                unoptimized={true}
+                />
               <div>
                 <h1 className="text-4xl font-extrabold text-gray-900 mb-2">
                   Welcome back, {userData.name.split(' ')[0]}! 👋
@@ -317,7 +326,7 @@ export default function DashboardPage() {
             {/* Sidebar - Account Info & Quick Links */}
             <div className="space-y-6">
               {/* Account Summary */}
-              <div className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl p-6 text-white">
+              <div className="bg-linear-to-br from-gray-900 to-gray-800 rounded-2xl p-6 text-white">
                 <h3 className="text-xl font-bold mb-6">Account Summary</h3>
                 <div className="space-y-4">
                   <div className="flex items-center gap-3 p-3 bg-white/10 rounded-xl">
@@ -380,7 +389,7 @@ export default function DashboardPage() {
       </section>
 
       {/* Saved Items / Wishlist */}
-      <section className="py-12 bg-gradient-to-br from-gray-100 via-gray-50 to-white">
+      <section className="py-12 bg-linear-to-br from-gray-100 via-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between mb-8">
             <h2 className="text-3xl font-extrabold text-gray-900 flex items-center gap-2">
