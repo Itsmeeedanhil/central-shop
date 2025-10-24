@@ -11,34 +11,41 @@ export default function LoginPage() {
   const [successMessage, setSuccessMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const HARDCODED_EMAIL = "Admin@gmail.com";
-  const HARDCODED_PASSWORD = "Admin123";
-
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
-    setSuccessMessage("");
-    setIsLoading(true);
+  e.preventDefault();
+  setError("");
+  setSuccessMessage("");
+  setIsLoading(true);
 
-    if (!email || !password) {
-      setError("Please fill in both fields.");
-      setIsLoading(false);
-      return;
+  if (!email || !password) {
+    setError("Please fill in both fields.");
+    setIsLoading(false);
+    return;
+  }
+
+  try {
+    const response = await fetch("/api/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || "Login failed");
     }
 
-    await new Promise((resolve) => setTimeout(resolve, 500)); // simulate delay
+    setSuccessMessage("Login successful! Redirecting to dashboard...");
+    setTimeout(() => router.push("/dashboard"), 1000);
 
-    if (email === HARDCODED_EMAIL && password === HARDCODED_PASSWORD) {
-      setSuccessMessage("Login successful! Redirecting to dashboard...");
-      setTimeout(() => {
-        router.push("/dashboard");
-      }, 1000);
-    } else {
-      // NOTE: Better security practice would be to not give a hint in a real app!
-      setError("Invalid email or password. Hint: Admin@gmail.com / Admin123");
-      setIsLoading(false);
-    }
-  };
+  } catch (err) {
+    setError(err.message);
+  } finally {
+    setIsLoading(false);
+  }
+};
+
 
   return (
     <div className="flex min-h-screen">
